@@ -10,14 +10,19 @@ import android.view.MenuItem;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.Set;
 
 
@@ -32,12 +37,33 @@ public class Login extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
 
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+
+            }
+
+            });
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_friends"));
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
                     AccessToken currentAccessToken) {
+                Log.d("JSON1", currentAccessToken.getApplicationId());
+                Log.d("JSON2", currentAccessToken.getUserId());
+                Log.d("JSON3", currentAccessToken.getToken());
+
                 accessToken=currentAccessToken;
             }
         };
@@ -56,8 +82,8 @@ public class Login extends ActionBarActivity {
         request.setParameters(parameters);
         request.executeAsync();
         setContentView(R.layout.activity_login);
-        loginButton = (LoginButton)findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile");
+        /*loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton.setReadPermissions("public_profile");*/
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

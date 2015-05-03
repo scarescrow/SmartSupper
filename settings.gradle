@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 include ':app'
+=======
+include ':app', ':facebook'
+>>>>>>> 1bb239ab5309cc8f7ba1861ae09de1f4e0608f40

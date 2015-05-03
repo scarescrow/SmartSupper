@@ -48,7 +48,7 @@ public class Login extends ActionBarActivity {
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,link");
         request.setParameters(parameters);
-        request.executeAsync();*/
+        request.executeAsync();*/ull
         setContentView(R.layout.activity_login);
     }
 

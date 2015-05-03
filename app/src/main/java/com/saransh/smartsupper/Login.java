@@ -3,6 +3,7 @@ package com.saransh.smartsupper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,14 +13,20 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Set;
 
 
 public class Login extends ActionBarActivity {
     CallbackManager callbackManager;
     AccessTokenTracker accessTokenTracker;
     AccessToken  accessToken;
+    LoginButton loginButton;
+    Set<String> xyz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +37,8 @@ public class Login extends ActionBarActivity {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
-                    accessToken) {
-                // App code
+                    AccessToken currentAccessToken) {
+                accessToken=currentAccessToken;
             }
         };
         GraphRequest request = GraphRequest.newMeRequest(
@@ -41,7 +48,7 @@ public class Login extends ActionBarActivity {
                     public void onCompleted(
                             JSONObject object,
                             GraphResponse response) {
-                        // Application code
+                        Log.d("JSON", String.valueOf(object));
                     }
                 });
         Bundle parameters = new Bundle();
@@ -49,6 +56,8 @@ public class Login extends ActionBarActivity {
         request.setParameters(parameters);
         request.executeAsync();
         setContentView(R.layout.activity_login);
+        loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton.setReadPermissions("public_profile");
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

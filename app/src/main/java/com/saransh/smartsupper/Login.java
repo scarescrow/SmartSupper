@@ -10,12 +10,16 @@ import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 
+import org.json.JSONObject;
 
 
 public class Login extends ActionBarActivity {
     CallbackManager callbackManager;
     AccessTokenTracker accessTokenTracker;
+    AccessToken  accessToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +30,11 @@ public class Login extends ActionBarActivity {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
-                    AccessToken currentAccessToken) {
+                    accessToken) {
                 // App code
             }
         };
-/*        GraphRequest request = GraphRequest.newMeRequest(
+        GraphRequest request = GraphRequest.newMeRequest(
                 accessToken,
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
@@ -43,7 +47,7 @@ public class Login extends ActionBarActivity {
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,link");
         request.setParameters(parameters);
-        request.executeAsync();*/
+        request.executeAsync();
         setContentView(R.layout.activity_login);
     }
     @Override

@@ -1,54 +1,21 @@
 package com.saransh.smartsupper;
 
 import android.content.Intent;
-<<<<<<< HEAD
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-=======
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
->>>>>>> 1bb239ab5309cc8f7ba1861ae09de1f4e0608f40
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
-<<<<<<< HEAD
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 
-import org.json.JSONObject;
-=======
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
->>>>>>> 1bb239ab5309cc8f7ba1861ae09de1f4e0608f40
 
 
 public class Login extends ActionBarActivity {
     CallbackManager callbackManager;
     AccessTokenTracker accessTokenTracker;
-<<<<<<< HEAD
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,76 +43,19 @@ public class Login extends ActionBarActivity {
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,link");
         request.setParameters(parameters);
-        request.executeAsync();*/ull
+        request.executeAsync();*/
         setContentView(R.layout.activity_login);
     }
-
-=======
-    ProfileTracker profileTracker;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.saransh.smartsupper",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
-        }
-
-
-        setContentView(R.layout.activity_login);
-
-     /*   LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("user_friends");*/
-
-        callbackManager = CallbackManager.Factory.create();
-
-        profileTracker = new ProfileTracker() {
-            @Override
-            protected void onCurrentProfileChanged(
-                    Profile oldProfile,
-                    Profile currentProfile) {
-                // App code
-            }
-        };
-
-     //   LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_friends"));
-
-    }
->>>>>>> 1bb239ab5309cc8f7ba1861ae09de1f4e0608f40
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-<<<<<<< HEAD
     @Override
-    public void onDestroy() {
+    public void onDestroy(){
         super.onDestroy();
         accessTokenTracker.stopTracking();
     }
-
-
-
-
-=======
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        profileTracker.stopTracking();
-    }
-
->>>>>>> 1bb239ab5309cc8f7ba1861ae09de1f4e0608f40
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

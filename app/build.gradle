@@ -6,11 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.saransh.smartsupper"
-<<<<<<< HEAD
+
         minSdkVersion 9
-=======
-        minSdkVersion 10
->>>>>>> 1bb239ab5309cc8f7ba1861ae09de1f4e0608f40
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"

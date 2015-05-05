@@ -6,14 +6,39 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import com.saransh.smartsupper.library.DatabaseHandler;
+import com.saransh.smartsupper.library.UserFunctions;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    TextView t;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        t = (TextView) findViewById(R.id.text);
+
+        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+
+        int count = db.getRowCount();
+
+        if(count > 0) {
+
+            t.setText(db.getName());
+
+        } else {
+            Intent i = new Intent(this, Login.class);
+            startActivity(i);
+        }
+
+        db.close();
     }
+
     public void sign_up_message(View view)
     {
         Intent intent = new Intent(this, SignUp.class);
@@ -39,7 +64,8 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            new UserFunctions().logoutUser(getApplicationContext());
             return true;
         }
 
